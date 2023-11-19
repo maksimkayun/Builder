@@ -16,4 +16,9 @@ public class TeacherBuilder : Builder
     {
         throw new NotImplementedException();
     }
+
+    public override Builder SetPrivateMembers(params object[] parameters)
+    {
+        throw new NotImplementedException();
+    }
 }

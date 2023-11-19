@@ -9,7 +9,7 @@ public class Director
         _builder.CreateBase();
     }
 
-    public void Construct(string fullName = "Иванов Иван Иванович", string address = "150200, Московская обл., Мытищи, Загородная")
+    public void Construct(string fullName = "Иванов Иван Иванович", string address = "150200, Московская обл., Мытищи, Загородная", params object[] otherParams)
     {
         if (fullName.Contains("  "))
         {
@@ -22,6 +22,11 @@ public class Director
         {
             var splitAddress = address.Trim().Split(",");
             _builder.SetAddress(splitAddress[0], splitAddress[1], splitAddress[2], splitAddress[3]);
+        }
+
+        if (otherParams.Any())
+        {
+            _builder.SetPrivateMembers(otherParams);
         }
     }
 

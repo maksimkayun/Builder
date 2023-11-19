@@ -9,7 +9,7 @@ public abstract class Person
     /// KeyValuePair<Type, object> - само свойство, его тип
     /// </summary>
     protected Dictionary<string, KeyValuePair<Type, object>> _properties { get; set; } = new();
-    public abstract void SetProperty(KeyValuePair<string, KeyValuePair<Type, object>> props);
+    public virtual void SetProperty(KeyValuePair<string, KeyValuePair<Type, object>> props) => _properties.Add(props.Key, props.Value);
 
     public override string ToString()
     {

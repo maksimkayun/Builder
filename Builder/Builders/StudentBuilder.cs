@@ -1,19 +1,27 @@
-﻿namespace Builder.Builders;
+﻿using Builder.Models;
+using Builder.Properties;
+
+namespace Builder.Builders;
 
 public class StudentBuilder : Builder
 {
     public override Builder CreateBase()
     {
-        throw new NotImplementedException();
+        _person = new Student();
+        return this;
     }
 
-    public override Builder SetName(string firstName, string? midName, string lastName)
+    public override Builder SetPrivateMembers(params object[] parameters)
     {
-        throw new NotImplementedException();
-    }
+        var direction = new DirectionStudyProperty()
+        {
+            Code = parameters[0].ToString(),
+            Name = parameters[1].ToString()
+        };
+        
+        _person.SetProperty(new KeyValuePair<string, KeyValuePair<Type, object>>("Факультет", 
+            new KeyValuePair<Type, object>(direction.GetType(), direction)));
 
-    public override Builder SetAddress(string postal, string region, string city, string street)
-    {
-        throw new NotImplementedException();
+        return this;
     }
 }

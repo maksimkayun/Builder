@@ -5,39 +5,35 @@ namespace Builder.Builders;
 
 public class EntrantBuilder : Builder
 {
+    public EntrantBuilder()
+    {
+    }
+
     public override Builder CreateBase()
     {
         _person = new Entrant();
         return this;
     }
 
-    public override Builder SetName(string firstName, string? midName, string lastName)
+    public override Builder SetPrivateMembers(params object[] parameters)
     {
-        var prop = new NameProperty
+        var score = new ScoreProperty
         {
-            FirstName = firstName,
-            MiddleName = midName,
-            LastName = lastName
-        };
-
-        _person.SetProperty(new KeyValuePair<string, KeyValuePair<Type, object>>("ФИО",
-            new KeyValuePair<Type, object>(prop.GetType(), prop)));
-        return this;
-    }
-
-    public override Builder SetAddress(string postal, string region, string city, string street)
-    {
-        var prop = new AddressProperty()
-        {
-            Postal = postal.Replace("  ", " ").Trim(),
-            Region = region.Replace("  ", " ").Trim(),
-            Town = city.Replace("  ", " ").Trim(),
-            Street = street.Replace("  ", " ").Trim()
+            Score = int.TryParse(parameters[0] as string, out int result) ? result : 0
         };
         
-        _person.SetProperty(new KeyValuePair<string, KeyValuePair<Type, object>>("Адрес",
-            new KeyValuePair<Type, object>(prop.GetType(), prop)));
-        
+        _person.SetProperty(new KeyValuePair<string, KeyValuePair<Type, object>>("Количество баллов", 
+            new KeyValuePair<Type, object>(score.GetType(), score)));
+
+        var direction = new DirectionStudyProperty
+        {
+            Code = parameters[1].ToString(),
+            Name = parameters[2].ToString()
+        };
+
+        _person.SetProperty(new KeyValuePair<string, KeyValuePair<Type, object>>("Направление подачи документов",
+            new KeyValuePair<Type, object>(direction.GetType(), direction)));
+
         return this;
     }
 }
