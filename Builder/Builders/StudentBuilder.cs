@@ -13,15 +13,17 @@ public class StudentBuilder : Builder
 
     public override Builder SetPrivateMembers(params object[] parameters)
     {
-        var direction = new DirectionStudyProperty()
+        foreach (var parameter in parameters)
         {
-            Code = parameters[0].ToString(),
-            Name = parameters[1].ToString()
-        };
+            switch (parameter)
+            {
+                case DirectionStudyProperty direction:
+                    _person.SetProperty(new KeyValuePair<string, object>("Факультет", direction));
+                    break;
+                    
+            }
+        }
         
-        _person.SetProperty(new KeyValuePair<string, KeyValuePair<Type, object>>("Факультет", 
-            new KeyValuePair<Type, object>(direction.GetType(), direction)));
-
         return this;
     }
 }

@@ -6,10 +6,10 @@ public abstract class Person
 {
     /// <summary>
     /// Словарь содержит всю информацию о сущности. Ключ string - имя свойства (например - ФИО),
-    /// KeyValuePair<Type, object> - само свойство, его тип
+    /// object - само свойство
     /// </summary>
-    protected Dictionary<string, KeyValuePair<Type, object>> _properties { get; set; } = new();
-    public virtual void SetProperty(KeyValuePair<string, KeyValuePair<Type, object>> props) => _properties.Add(props.Key, props.Value);
+    protected Dictionary<string,  object> _properties { get; set; } = new();
+    public virtual void SetProperty(KeyValuePair<string,  object> props) => _properties.Add(props.Key, props.Value);
 
     public override string ToString()
     {
@@ -18,7 +18,7 @@ public abstract class Person
         sb.AppendLine($"Информация о {GetType().Name}");
         foreach (var prop in _properties)
         {
-            sb.AppendLine($"{prop.Key}: {prop.Value.Value}");
+            sb.AppendLine($"{prop.Key}: {prop.Value}");
         }
 
         return sb.ToString();

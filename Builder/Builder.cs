@@ -18,8 +18,8 @@ public abstract class Builder
             LastName = lastName
         };
 
-        _person.SetProperty(new KeyValuePair<string, KeyValuePair<Type, object>>("ФИО",
-            new KeyValuePair<Type, object>(prop.GetType(), prop)));
+        _person.SetProperty(new KeyValuePair<string, object>("ФИО", prop));
+        
         return this;
     }
 
@@ -33,8 +33,7 @@ public abstract class Builder
             Street = street.Replace("  ", " ").Trim()
         };
         
-        _person.SetProperty(new KeyValuePair<string, KeyValuePair<Type, object>>("Адрес",
-            new KeyValuePair<Type, object>(prop.GetType(), prop)));
+        _person.SetProperty(new KeyValuePair<string, object>("Адрес", prop));
         
         return this;
     }
